@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <title>رمزگذار فارسی</title>
+  <style>
+    body { font-family: Vazir, sans-serif; direction: rtl; padding: 20px; background: #f0f0f0; }
+    textarea { width: 100%; height: 100px; margin-bottom: 10px; font-size: 16px; }
+    button { padding: 10px 20px; font-size: 16px; margin: 5px; }
+    .output { background: #fff; padding: 10px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h2>🔐 رمزگذار و رمزگشای متن فارسی</h2>
+  <textarea id="inputText" placeholder="متن فارسی خود را وارد کنید..."></textarea>
+  <br>
+  <button onclick="encode()">رمزگذاری</button>
+  <button onclick="decode()">رمزگشایی</button>
+  <h3>🔎 خروجی:</h3>
+  <div class="output" id="outputText"></div>
+
+  <script>
+    function encode() {
+      const text = document.getElementById("inputText").value;
+      const encoded = btoa(unescape(encodeURIComponent(text)));
+      document.getElementById("outputText").innerText = encoded;
+    }
+
+    function decode() {
+      const text = document.getElementById("inputText").value;
+      try {
+        const decoded = decodeURIComponent(escape(atob(text)));
+        document.getElementById("outputText").innerText = decoded;
+      } catch (e) {
+        document.getElementById("outputText").innerText = "❌ متن معتبر نیست یا رمزگذاری نشده.";
+      }
+    }
+  </script>
+</body>
+</html>
